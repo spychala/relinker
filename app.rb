@@ -1,6 +1,6 @@
 require 'sinatra'
-require "sinatra/reloader"
-require 'pry'
+#require "sinatra/reloader"
+#require 'pry'
 require 'pg'
 require 'nokogiri'
 require 'open-uri'
