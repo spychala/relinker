@@ -81,7 +81,7 @@ get '/kontakt' do
     erb :indexforum
   end
 
-# post sprawdzenie forum
+# --post sprawdzenie forum
   post '/sprawdz-linki-forum' do
       fora = []
       adresy = params[:adresy] || "brak"
