@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Sprawdź wpisy sponsorowane - relinker.pl</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/jquery.jcarousel.css" type="text/css" media="all" />
+<link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="js/func.js"></script>
+<!--[if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif]-->
+</head>
+<body>
+<!-- START PAGE SOURCE -->
+<div class="shell">
+  <div id="header">
+    <img src="images/relinker-logo2.jpg" class="logo" />
+    <%= erb :nawigacja %>
+  </div>
+  <div id="main">
+    <div id="content" class="left">
+<h1>Sprawdź sponsorowane</h1>
+<p>Tu możesz sprawdzić, czy na danym serwisie można opublikować wpis sponsorowany.</p>
+
+<ul>
+<li>sprawdzane są bazy linkhouse.pl oraz whitepress.pl (stan: sierpień 2018)</li>
+<li>dużo serwisów pojawia się w ofercie obu serwisów, dla nich wyniki są zgrupowane</li>
+<li>należy wkleić listę domen do sprawdzenia - listę można zdobyć np. po analizie Majestic lub Ahrefs</li>
+<li>sprawdzenie powinno zając do 2 minut</li>
+</ul>
+
+      <form action="/sprawdz-linki-sponsorowane" method="post">
+      <textarea rows="30" cols="120" name="adresy"></textarea>
+      <br><br>
+      <input type="submit" value="Sprawdź" class="btn">
+      </form>
+
+    </div>
+     <%= erb :sidebar %>
+    <div class="cl">&nbsp;</div>
+  </div>
+     <%= erb :stopka %>
+</div>
+<!-- END PAGE SOURCE -->
+</body>
+</html>
