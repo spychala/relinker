@@ -1,6 +1,6 @@
 require 'sinatra'
-#require "sinatra/reloader"
-#require 'pry'
+require "sinatra/reloader"
+require 'pry'
 require 'pg'
 require 'nokogiri'
 require 'open-uri'
@@ -11,9 +11,6 @@ require "net/http"
   end
 
   set :port, 8080
-  #set :static, true
-  #set :public_folder, "static"
-  #set :views, "views"
 
   def check_if_forum(url)
     doc = Nokogiri::HTML(open(url)) rescue nil
@@ -23,7 +20,7 @@ require "net/http"
       sprawdzenie = 1
     end
     return sprawdzenie
-  end # koniec funkcji check_if_forum
+  end 
 
   def check_response(url)
     uri = URI.parse(url)
@@ -51,7 +48,7 @@ get '/kontakt' do
 
 # post sprawdzenie premium
   post '/sprawdz-linki-sponsorowane' do
-      con = PG.connect :dbname => 'postgres', :user => 'postgres', :password => 'qwe'
+      con = PG.connect :dbname => 'postgres', :user => '', :password => ''
       potwierdzone_lh = []
       potwierdzone_wp = []      
       potwierdzone_wspolne = []
@@ -88,8 +85,6 @@ get '/kontakt' do
       przeslane = adresy.split(/\r?\n/)
       przeslane.each do |link|
         link = link.gsub("https://","").gsub("http://","").gsub("www.","").gsub("/","")
-        puts "......................."
-        puts "sprawdzam #{link}"
         forum = check_if_forum("http://#{link}") rescue nil
         if forum == 1
           fora.push(link)
@@ -99,14 +94,4 @@ get '/kontakt' do
       erb :wynikiforum, :locals => {'fora' => fora}
   end
 
-  get '/baza' do
-    con = PG.connect :dbname => 'postgres', :user => 'postgres', :password => 'qwe'
-    rs = con.exec "select 1 from linkhouse where strona LIKE '%dalowo.info%';"
-    if rs.num_tuples > 0
-      puts "jest"
-      puts rs[0]
-    else
-      puts "nie ma"
-    end
-      erb :baza, :locals => {'adresy' => rs}
-  end
+ 
