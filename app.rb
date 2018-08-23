@@ -11,6 +11,9 @@ require "net/http"
   end
 
   set :port, 8080
+  #set :static, true
+  #set :public_folder, "static"
+  #set :views, "views"
 
   def check_if_forum(url)
     doc = Nokogiri::HTML(open(url)) rescue nil
@@ -20,7 +23,7 @@ require "net/http"
       sprawdzenie = 1
     end
     return sprawdzenie
-  end 
+  end # koniec funkcji check_if_forum
 
   def check_response(url)
     uri = URI.parse(url)
@@ -48,7 +51,7 @@ get '/kontakt' do
 
 # post sprawdzenie premium
   post '/sprawdz-linki-sponsorowane' do
-      con = PG.connect :dbname => 'postgres', :user => '', :password => ''
+      con = PG.connect :dbname => 'postgres', :user => 'postgres', :password => 'qwe'
       potwierdzone_lh = []
       potwierdzone_wp = []      
       potwierdzone_wspolne = []
@@ -85,6 +88,8 @@ get '/kontakt' do
       przeslane = adresy.split(/\r?\n/)
       przeslane.each do |link|
         link = link.gsub("https://","").gsub("http://","").gsub("www.","").gsub("/","")
+        puts "......................."
+        puts "sprawdzam #{link}"
         forum = check_if_forum("http://#{link}") rescue nil
         if forum == 1
           fora.push(link)
