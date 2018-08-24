@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: relinker_development
+  pool: 5
+  username: dbuser
+  password: hardpassword

@@ -1,19 +1,26 @@
 require 'sinatra'
-require "sinatra/reloader"
-require 'pry'
 require 'pg'
 require 'nokogiri'
 require 'open-uri'
 require "net/http"
+require 'yaml'
 
+configure { set :server, :puma }
+
+ENV['RACK_ENV'] ||= 'development'
+if ENV['RACK_ENV'] == 'development'
+  require "sinatra/reloader"
+  require 'byebug'
   configure :development do
     register Sinatra::Reloader
   end
+  set :port, 8088
+end
 
-  set :port, 8080
   #set :static, true
   #set :public_folder, "static"
   #set :views, "views"
+  DBCONFIG ||= YAML.load_file("./config/database.yml")[ENV['RACK_ENV']]
 
   def check_if_forum(url)
     doc = Nokogiri::HTML(open(url)) rescue nil
@@ -33,6 +40,7 @@ require "net/http"
     return response.code
   end
 
+class Relinker < Sinatra::Base
   get '/' do
     erb :index
   end
@@ -51,9 +59,9 @@ get '/kontakt' do
 
 # post sprawdzenie premium
   post '/sprawdz-linki-sponsorowane' do
-      con = PG.connect :dbname => 'postgres', :user => 'postgres', :password => 'qwe'
+      con = PG.connect(dbname: DBCONFIG["database"], user: DBCONFIG["username"], password: DBCONFIG["password"])
       potwierdzone_lh = []
-      potwierdzone_wp = []      
+      potwierdzone_wp = []
       potwierdzone_wspolne = []
       adresy = params[:adresy] || "brak"
       przeslane = adresy.split(/\r?\n/)
@@ -98,5 +106,4 @@ get '/kontakt' do
       end
       erb :wynikiforum, :locals => {'fora' => fora}
   end
-
- 
+end
