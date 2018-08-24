@@ -12,6 +12,11 @@ GEM
     concurrent-ruby (1.0.5-java)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
+    mina (0.3.8)
+      open4 (~> 1.3.4)
+      rake
+    mina-multistage (1.0.2)
+      mina (>= 0.2.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
@@ -19,12 +24,14 @@ GEM
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     nokogiri (1.8.4-java)
+    open4 (1.3.4)
     pg (1.0.0)
     puma (3.12.0)
     puma (3.12.0-java)
     rack (2.0.5)
     rack-protection (2.0.3)
       rack
+    rake (12.3.1)
     sinatra (2.0.3)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -52,6 +59,8 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  mina (~> 0.3.8)
+  mina-multistage
   nokogiri
   pg
   puma

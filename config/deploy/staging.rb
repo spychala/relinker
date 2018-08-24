@@ -1,0 +1,6 @@
+set :port, '22'
+set :domain, 'test.relinker.pl'
+set :deploy_to, '/home/relinker/test.relinker.pl/'
+set :repository, 'git@github.com:spychala/relinker.git'
+set :branch, 'develop'
+set :user, 'relinker'
