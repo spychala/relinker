@@ -17,9 +17,6 @@ GEM
       rake
     mina-multistage (1.0.2)
       mina (>= 0.2.1)
-    mina-puma (0.3.2)
-      mina (< 1.0.0)
-      puma (>= 2.13)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
@@ -64,7 +61,6 @@ DEPENDENCIES
   byebug
   mina (~> 0.3.8)
   mina-multistage
-  mina-puma
   nokogiri
   pg
   puma

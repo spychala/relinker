@@ -10,5 +10,4 @@ group :development do
   gem 'byebug' #zamiast pry, zdecydowanie lepiej działa
   gem 'mina', '~> 0.3.8'
   gem 'mina-multistage', require: false
-  gem 'mina-puma', require: false
 end
