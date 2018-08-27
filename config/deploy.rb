@@ -1,5 +1,6 @@
 require 'mina/multistage'
 require 'mina/git'
+require 'mina/puma'
 
 set :keep_releases, 5
 set :shared_paths, ['config/database.yml', 'config/puma.rb', 'tmp']
@@ -38,5 +39,8 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     queue! %[source ~/.profile && bundle install]
     invoke :'deploy:cleanup'
+    on :launch do
+      invoke :'puma:phased_restart'
+    end
   end
 end
